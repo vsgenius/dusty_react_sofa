@@ -1,0 +1,12 @@
+.Form {
+    display: flex;
+    margin: 20px 20px;
+}
+.Form-Input {
+    flex-grow: 1;
+    padding: 10px;
+    font-size: 1rem;
+}
+.Form-Button {
+    font-size: 1rem;
+}
