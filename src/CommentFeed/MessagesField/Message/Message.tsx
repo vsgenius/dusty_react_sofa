@@ -15,24 +15,26 @@ const Message:FC<MessageProp> = ({ item }) => {
     const [emojies, setEmojies] = useState<string[]>([]);
     const [showForm, setShowForm] = useState(false);
 
-    const handleMouseEnter = (event:any)=>{
-        event.target.style.backgroundColor = '#ffeaea';
+    const handleMouseEnter = () => {
         setHover(true);
     }
 
-    const handleMouseLeave = (event:any)=>{
-        event.target.style.backgroundColor = 'white';
+    const handleMouseLeave = () => {
         setHover(false);
         setShowForm(false);
     }
     
-    const handleClickEmoji = ()=>{
+    const handleClickEmoji = () => {
         setShowForm(true);
+    }
+
+    const addEmoji = (emoji: string) => {
+        setEmojies(prev=>[...prev,emoji]);
     }
 
   return (
     <div 
-        className={cnMessage()} 
+        className={cnMessage({"hovered":hover})} 
         onMouseEnter={handleMouseEnter} 
         onMouseLeave={handleMouseLeave}>
         {item.text}
@@ -44,12 +46,10 @@ const Message:FC<MessageProp> = ({ item }) => {
             </span>}
         {emojies &&
             <div className={cnMessage('Emojies')}>
-                    { emojies.map((emoji,index)=>
-                    <span key={index}>{emoji}</span>)}
+                { emojies.map((emoji,index)=>
+                <span key={index}>{emoji}</span>)}
             </div>}
-        {showForm && <FormEmojies setEmojies={setEmojies}/>
-        }
-
+        {showForm && <FormEmojies addEmoji={addEmoji}/>}
     </div>
   )
 }

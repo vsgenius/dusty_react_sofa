@@ -22,3 +22,7 @@
     left:20px;
     bottom: 5px;
 }
+
+.Message_hovered {
+    background-color: #ffeaea;
+}

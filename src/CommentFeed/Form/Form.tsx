@@ -1,21 +1,22 @@
 import React, { useState } from 'react'
 import { cnForm } from './Form.classname'
-import type { FC, FormEvent,ChangeEvent, SetStateAction, Dispatch } from 'react';
+import type { FC, FormEvent,ChangeEvent } from 'react';
 import type { MessageType } from '../CommentFeed'
 
 import './Form.css'
 
 type FormProp = {
-    setMessages: Dispatch<SetStateAction<MessageType[]>>
+  newMessage: (value:MessageType) => void;
 }
 
-const Form:FC<FormProp> = ({ setMessages }) => {
+const Form:FC<FormProp> = ({ newMessage }) => {
     const [textValue, setTextValue] = useState<string>('')
 
     const handleSubmit = (event:FormEvent<HTMLFormElement>)=>{
         event.preventDefault();
         if (!textValue) return;
-        setMessages(prev=>[...prev,{text:textValue}])
+        
+        newMessage({ text:textValue });
         setTextValue('');
     }
 

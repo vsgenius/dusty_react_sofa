@@ -1,30 +1,29 @@
 import React from 'react';
 import { cnFormEmojies } from './FormEmojies.classname';
-import type { FC, SetStateAction, Dispatch } from 'react';
+import type { FC } from 'react';
 
 import './FormEmojies.css'
 
 type FormEmojiesProp = {
-    setEmojies:Dispatch<SetStateAction<string[]>>
+  addEmoji: (emoji: string) => void;
 }
 
-const FormEmojies:FC<FormEmojiesProp> = ({ setEmojies }) => {
-    const listEmojies = ['😀','😃','😆','😅','🤣','😂','😇','😊','😜','🤪'];
+const LIST_EMOJIES = ['😀','😃','😆','😅','🤣','😂','😇','😊','😜','🤪'];
 
+const FormEmojies:FC<FormEmojiesProp> = ({ addEmoji }) => {
     const handleClick = (event:any)=>{
-     setEmojies(prev=>[...prev,event.target.textContent]);
+        addEmoji(event.target.textContent);
     }
-
   return (
     <div className={cnFormEmojies()}>
-        {listEmojies && listEmojies.map((emoji,index)=>
+        {LIST_EMOJIES && LIST_EMOJIES.map((emoji,index) =>
                 <span 
                     key={index} 
                     className={cnFormEmojies('Item')} 
-                    onClick={handleClick}>
-                        {emoji}
+                    onClick={handleClick}
+                >
+                  {emoji}
                 </span>)}
-        
     </div>
   )
 }
